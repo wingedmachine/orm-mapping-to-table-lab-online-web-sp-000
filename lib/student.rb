@@ -14,6 +14,12 @@ class Student
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
   end
 
+  def self.create(hash)
+    student = Student.new(hash[:name], hash[:grade])
+    student.save
+    student
+  end
+
   def self.create_table
     DB[:conn].execute("CREATE TABLE students (
                          id INTEGER PRIMARY KEY,
