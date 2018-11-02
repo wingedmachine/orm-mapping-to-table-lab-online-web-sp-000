@@ -8,11 +8,16 @@ class Student
     @grade = grade
   end
 
+  def save
+    DB[:conn].execute("INSERT INTO students (name, grade) 
+                         VALUES (#{name}, #{grade})")
+  end
+
   def self.create_table
     DB[:conn].execute("CREATE TABLE students (
                          id INTEGER PRIMARY KEY,
                          name TEXT,
-                         grade TEXT )" )
+                         grade TEXT )")
   end
 
   def self.drop_table
